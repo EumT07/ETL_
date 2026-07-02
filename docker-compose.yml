@@ -1,0 +1,21 @@
+services:
+  database:
+    image: postgres:17
+    container_name: etl_process
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./SQL-ETL/scripts/01_db_init.sql:/docker-entrypoint-initdb.d/01_db_init.sql
+      - ./SQL-ETL/scripts/1_bronze/ddl_bronze.sql:/docker-entrypoint-initdb.d/ddl_bronze.sql
+      - ./SQL-ETL/scripts/1_bronze/docker_load_bronze.sql:/docker-entrypoint-initdb.d/docker_load_bronze.sql
+      - ./SQL-ETL/source/crm_data.csv:/tmp/crm_data.csv
+
+volumes:
+  postgres_data:
+    driver: local

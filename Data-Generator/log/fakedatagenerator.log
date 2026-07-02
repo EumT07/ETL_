@@ -1,0 +1,13 @@
+2026-06-30 11:57:01 INFO [FakeDataGenerator] Starting FakeDataGenerator with max_size=100
+2026-06-30 11:57:01 INFO [FakeDataGenerator] Starting fake dataset generation
+2026-06-30 11:57:03 INFO [FakeDataGenerator] Starting customer generation
+2026-06-30 11:57:03 INFO [FakeDataGenerator] Finished customer generation
+2026-06-30 11:57:05 INFO [FakeDataGenerator] Starting product generation
+2026-06-30 11:57:05 INFO [FakeDataGenerator] Finished product generation
+2026-06-30 11:57:07 INFO [FakeDataGenerator] Starting order generation
+2026-06-30 11:57:07 INFO [FakeDataGenerator] Finished order generation
+2026-06-30 11:57:07 INFO [FakeDataGenerator] Finished fake dataset generation
+2026-06-30 11:57:07 INFO [FakeDataGenerator] Starting DataFrame generation
+2026-06-30 11:57:07 INFO [FakeDataGenerator] Creating Source Folder
+2026-06-30 11:57:09 INFO [FakeDataGenerator] Creating CSV and Excel Files
+2026-06-30 11:57:13 INFO [FakeDataGenerator] Finished DataFrame generation

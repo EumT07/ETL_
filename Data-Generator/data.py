@@ -54,19 +54,21 @@ class FakeDataGenerator:
             characters = ["_","-","/"]
             customer_type = ["cst","customer","user"]
             customer_pool = []
-            for _ in range(300):
+            for _ in range(600):
                 # Generating a pool of unique customers to choose from later
                 by_country = random.choice(countries)
+                #Gender to create user 
                 gender = random.choice(["female","male"])
                 first_name = f"{random.choice(spaces)}{random.choice(by_country['people'][gender]['first_name'])}{random.choice(spaces)}"
                 last_name = f"{random.choice(spaces)}{random.choice(by_country['last_names'])}{random.choice(spaces)}"
+                
                 customer_pool.append({
                     "id": f"{random.choice(customer_type)}{random.choice(characters)}{random.randint(0000, 9999)}",
                     "first_name":first_name,
                     "last_name": last_name,
                     "email": self._fake_email(first_name.strip(),last_name.strip()),
-                    "gender": gender.lower(),
-                    "birth_date": self._fake_dates(1980,2008),
+                    "gender": random.choice(by_country['people'][gender]['gender']),
+                    "birth_date": self._fake_random_dates(1980,2008),
                     "address": self._fake_address(by_country["city"],by_country["state"],by_country["street"]),
                     "country": random.choice(by_country['country']),
                     "reviews": random.randint(0,5)
@@ -84,7 +86,7 @@ class FakeDataGenerator:
             characters = ["_","-","/"]
             letters = ["T","A","O","I","R","Z","U"]
     
-            for _ in range(100):
+            for _ in range(400):
                 price, quantity, total = self._products_price()
                 letter_code = f"{random.choice(letters)}{random.choice(letters)}"
                 product = random.choice(product_catalog)
@@ -111,8 +113,8 @@ class FakeDataGenerator:
             characters = ["_","-","/"]
             letters = ["T","A","O","I","R","Z","U"]
             orders = []
-            for _ in range(100):
-                purchase_date, shipping_date, delivery_date = self._generate_dates()
+            for _ in range(600):
+                purchase_date, shipping_date, delivery_date = self._generate_orderDates()
                 letter_code = f"{random.choice(letters)}{random.choice(letters)}"
                 orders.append({
                     "transaction_id": f"TXN{random.choice(characters)}{random.randint(10000, 99999)}-{letter_code}",
@@ -152,7 +154,7 @@ class FakeDataGenerator:
             self.logger.exception("Error generating fake address")
             raise
     
-    def _fake_dates(self,start_year:int, end_year:int)-> str:
+    def _fake_random_dates(self,start_year:int, end_year:int)-> str:
         try:
             start_date = datetime(start_year,1,1)
             end_date = datetime(end_year,12,1)
@@ -198,9 +200,9 @@ class FakeDataGenerator:
             self.logger.exception("Error generating product price data")
             raise
 
-    def _generate_dates(self):
+    def _generate_orderDates(self):
         try:
-            purchase_date = self._fake_dates(2018,2026)
+            purchase_date = self._fake_random_dates(2018,2026)
             shipping_date = None
             delivery_date = None
 
@@ -290,8 +292,8 @@ class FakeDataGenerator:
                 "pro_unit_price": product['price'],
                 "pro_quantity": product['quantity'],
                 "pro_total": product['total'],
-                "or_order_id": orders['transaction_id'],
-                "or_order_status": orders['order_status'],
+                "or_id": orders['transaction_id'],
+                "or_status": orders['order_status'],
                 "or_payment_method": orders['payment_method'],
                 "or_purchase_date": orders['purchase_date'],
                 "or_shipping_date": orders['shipping_date'],
