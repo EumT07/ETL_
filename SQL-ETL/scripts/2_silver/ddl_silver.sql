@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS silver.crm_customers (
   cst_birthdate   DATE,
   cst_address     TEXT,
   cst_country     VARCHAR(50),
-  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS silver.crm_products;
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS silver.crm_products (
   pro_category      VARCHAR(50),
   pro_sub_category  VARCHAR(50),
   pro_current_price NUMERIC(10,2),
-  created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS silver.crm_orders;
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS silver.crm_orders (
   or_shipping_date  DATE,
   or_delivery_date  DATE,
   or_order_total    INTEGER,
-  created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS silver.crm_order_items;
@@ -47,13 +47,13 @@ CREATE TABLE IF NOT EXISTS silver.crm_order_items (
   id UUID    PRIMARY KEY DEFAULT uuid_generate_v4(),
   itm_order_id   VARCHAR(50),
   itm_product_id VARCHAR(50),
-  itm_quantity   INTEGER CHECK ("quantity" > 0),
+  itm_quantity   INTEGER CHECK ("itm_quantity" > 0),
   itm_price      NUMERIC(10,2),
-  reviews    INTEGER CHECK ("reviews" >= 0 AND "reviews" <=5),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  itm_reviews    INTEGER CHECK ("itm_reviews" >= 0 AND "itm_reviews" <=5),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-ALTER TABLE silver.crm_orders ADD FOREIGN KEY ("customer_id") REFERENCES silver.crm_customers ("id") DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE silver.crm_orders ADD FOREIGN KEY ("or_customer_id") REFERENCES silver.crm_customers ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE silver.crm_order_items ADD FOREIGN KEY ("itm_order_id") REFERENCES silver.crm_orders ("id") DEFERRABLE INITIALLY IMMEDIATE;
 

@@ -9,3 +9,7 @@ wheels/
 
 # Virtual environments
 .venv
+
+#folders
+Data-Generator/log/
+Data-Generator/source/
