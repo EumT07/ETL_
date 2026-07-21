@@ -1,6 +1,4 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-DROP TABLE IF EXISTS silver.crm_customers;
+DROP TABLE IF EXISTS silver.crm_customers CASCADE;
 
 CREATE TABLE IF NOT EXISTS silver.crm_customers (
   id          VARCHAR(50) PRIMARY KEY,
@@ -15,7 +13,7 @@ CREATE TABLE IF NOT EXISTS silver.crm_customers (
   created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS silver.crm_products;
+DROP TABLE IF EXISTS silver.crm_products CASCADE;
 
 CREATE TABLE IF NOT EXISTS silver.crm_products (
   id            VARCHAR(50) PRIMARY KEY,
@@ -27,7 +25,7 @@ CREATE TABLE IF NOT EXISTS silver.crm_products (
   created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS silver.crm_orders;
+DROP TABLE IF EXISTS silver.crm_orders CASCADE;
 
 CREATE TABLE IF NOT EXISTS silver.crm_orders (
   id             VARCHAR(50) PRIMARY KEY,
@@ -44,7 +42,7 @@ CREATE TABLE IF NOT EXISTS silver.crm_orders (
 DROP TABLE IF EXISTS silver.crm_order_items;
 
 CREATE TABLE IF NOT EXISTS silver.crm_order_items (
-  id UUID    PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   itm_order_id   VARCHAR(50),
   itm_product_id VARCHAR(50),
   itm_quantity   INTEGER CHECK ("itm_quantity" > 0),
@@ -58,3 +56,10 @@ ALTER TABLE silver.crm_orders ADD FOREIGN KEY ("or_customer_id") REFERENCES silv
 ALTER TABLE silver.crm_order_items ADD FOREIGN KEY ("itm_order_id") REFERENCES silver.crm_orders ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE silver.crm_order_items ADD FOREIGN KEY ("itm_product_id") REFERENCES silver.crm_products ("id") DEFERRABLE INITIALLY IMMEDIATE;
+
+
+-- Checks Tables
+SELECT * FROM silver.crm_customers;
+SELECT * FROM silver.crm_products;
+SELECT * FROM silver.crm_orders;
+SELECT * FROM silver.crm_order_items;

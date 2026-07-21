@@ -134,8 +134,8 @@ BEGIN
     WITH products AS (
         SELECT
             CASE 
-                WHEN pro_id LIKE '%-%' OR pro_id LIKE '%/%' THEN REPLACE(REPLACE(pro_id,'/','_'),'-','_')
-                ELSE pro_id
+                WHEN pro_id LIKE '%-%' OR pro_id LIKE '%/%' THEN LOWER(REPLACE(REPLACE(pro_id,'/','_'),'-','_'))
+                ELSE LOWER(pro_id)
             END AS pro_id,
             pro_name,
             CASE
@@ -263,8 +263,8 @@ BEGIN
             ELSE crm_id
         END AS crm_id,
         CASE 
-            WHEN pro_id LIKE '%-%' OR pro_id LIKE '%/%' THEN REPLACE(REPLACE(pro_id,'/','_'),'-','_')
-            ELSE pro_id
+            WHEN pro_id LIKE '%-%' OR pro_id LIKE '%/%' THEN LOWER(REPLACE(REPLACE(pro_id,'/','_'),'-','_'))
+            ELSE LOWER(pro_id)
         END AS pro_id,
         CASE
             WHEN pro_quantity IS NULL

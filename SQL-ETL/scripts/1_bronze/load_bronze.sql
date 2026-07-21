@@ -20,11 +20,11 @@ BEGIN
 
     load_start_time := NOW();
     RAISE NOTICE '----------------Data info----------------';
-    RAISE NOTICE 'Truncating table: bronze.crm_data_info.';
+    RAISE NOTICE 'Truncating table: bronze.crm_data_info...';
     TRUNCATE TABLE bronze.crm_data_info;
-    RAISE NOTICE 'Loading data From csv into bronze.crm_data_info.';
+    RAISE NOTICE 'Loading data From csv into bronze.crm_data_info...';
     COPY bronze.crm_data_info
-    FROM 'C:\Program Files\PostgreSQL\18\pgAdmin 4\etl_process\crm_data.csv'
+    FROM '/tmp/crm_data.csv'
     WITH (FORMAT csv, HEADER true, DELIMITER ';', ENCODING 'UTF8');
     RAISE NOTICE 'Data loaded.';
     GET DIAGNOSTICS total_rows = ROW_COUNT;
