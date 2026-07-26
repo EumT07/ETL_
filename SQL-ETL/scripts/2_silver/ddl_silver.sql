@@ -60,7 +60,7 @@ ALTER TABLE silver.crm_order_items ADD FOREIGN KEY ("itm_product_id") REFERENCES
 
 
 -- Checks Tables
-SELECT * FROM silver.crm_customers;
-SELECT * FROM silver.crm_products;
-SELECT * FROM silver.crm_orders;
-SELECT * FROM silver.crm_order_items;
+-- SELECT * FROM silver.crm_customers;
+-- SELECT * FROM silver.crm_products;
+-- SELECT * FROM silver.crm_orders;
+-- SELECT * FROM silver.crm_order_items;

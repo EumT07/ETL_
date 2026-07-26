@@ -1,6 +1,6 @@
 -- View: Sales Details
-DROP VIEW IF EXISTS gold.vw_sales_details;
-CREATE VIEW gold.vw_sales_details AS (
+DROP VIEW IF EXISTS gold.fact_sales_details;
+CREATE VIEW gold.fact_sales_details AS (
     SELECT
         ord.id AS order_id, 
         cst.id AS customer_id,
@@ -24,9 +24,6 @@ CREATE VIEW gold.vw_sales_details AS (
     ON oi.itm_product_id = pr.id
 );
 
--- Checking view 
-SELECT * FROM gold.vw_sales_details;
-
 -- View: Customer Details
 DROP VIEW IF EXISTS gold.vw_customers_details;
 CREATE VIEW gold.vw_customers_details AS
@@ -47,9 +44,6 @@ GROUP BY
     cst.cst_first_name,
     cst.cst_last_name,
     cst.cst_country;
-
--- checking view
-SELECT * FROM gold.vw_customers_details;
 
 -- Product Performance
 
@@ -75,9 +69,6 @@ GROUP BY
     pr.pro_category,
     pr.pro_brand,
     pr.id;
-
--- check view
-SELECT * FROM gold.vw_product_performance;
 
 DROP VIEW IF EXISTS gold.vw_monthly_sales_trends;
 CREATE VIEW gold.vw_monthly_sales_trends AS
@@ -106,5 +97,8 @@ ORDER BY
     EXTRACT(YEAR FROM ord.or_purchase_date),
     EXTRACT(MONTH FROM ord.or_purchase_date);
 
--- Check View
-SELECT * FROM gold.vw_monthly_sales_trends;
+-- Check Views
+-- SELECT * FROM gold.vw_monthly_sales_trends;
+-- SELECT * FROM gold.vw_sales_details;
+-- SELECT * FROM gold.vw_customers_details;
+-- SELECT * FROM gold.vw_product_performance;

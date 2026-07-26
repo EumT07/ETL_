@@ -29,5 +29,5 @@ CREATE TABLE IF NOT EXISTS bronze.crm_data_info (
 );
 
 -- Check
-SELECT * FROM bronze.crm_data_info;
-SELECT COUNT(*) FROM bronze.crm_data_info;
+-- SELECT * FROM bronze.crm_data_info;
+-- SELECT COUNT(*) FROM bronze.crm_data_info;
