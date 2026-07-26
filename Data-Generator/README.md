@@ -4,7 +4,7 @@ This module contains the Python logic responsible for generating synthetic trans
 
 ---
 <p align="center">
-  <img src="" width="450" height="300"  alt="home" />
+  <img src="https://github.com/EumT07/ETL_/blob/master/assets/py.png" width="250" height="300"  alt="home" />
 </p>
 
 ## ⚙️ Generated Datasets & Entities
@@ -17,7 +17,7 @@ The generator outputs raw CSV files covering three main domain entities:
 4. **Files (`crm_data.csv`,`crm_data.xlsx` ):** Get a CSV, copy and past into SQL-ETL/source, in order to start using csv file to ETL pipeline.
 ---
 <p align="center">
-  <img src="" width="450" height="300"  alt="home" />
+  <img src="https://github.com/EumT07/ETL_/blob/master/assets/crm_data.png" width="220" height="650"  alt="home" />
 </p>
 ---
 
