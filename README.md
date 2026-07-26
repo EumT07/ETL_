@@ -3,7 +3,7 @@
 An end-to-end Data Engineering pipeline demonstrating a **Medallion Architecture (Bronze → Silver → Gold)** in PostgreSQL. This project generates synthetic e-commerce transactional data, cleanses and normalizes raw tables, and builds an analytical star-schema model optimized for Business Intelligence (Power BI) and SQL reporting.
 
 <p align="center">
-  <img src="" width="450" height="300"  alt="home" />
+  <img src="https://github.com/EumT07/ETL_/blob/master/assets/data.png" width="650" height="400"  alt="home" />
 </p>
 
 ## 📐 Architecture Overview
