@@ -2,12 +2,15 @@ import random, logging, os, time
 from datetime import datetime, timedelta
 import pandas as pd
 from typing import List, Dict, Tuple
-from source_details import countries, product_catalog, order_status, payment_methods
+from source_details import countries, product_catalog, order_status, payment_methods, ads_sources
 from unidecode import unidecode
 
 class FakeDataGenerator:
-    def __init__(self, max_size: int = 100):
+    def __init__(self, max_size: int = 100, customer_size: int = 40, products_size: int = 100, orders_size: int = 200):
         self.max_size = max_size
+        self.customer_size = customer_size
+        self.products_size = products_size
+        self.orders_size = orders_size
         self._setup_logger()
         self.logger.info("Starting FakeDataGenerator with max_size=%s", self.max_size)
         self.customers, self.products, self.orders = self._fake_dataset()
@@ -35,18 +38,18 @@ class FakeDataGenerator:
         try:
             self.logger.info("Starting fake dataset generation")
             time.sleep(2)
-            customers = self.generate_customers()
+            customers = self.generate_customers(self.customer_size)
             time.sleep(2)
-            products = self.generate_products()
+            products = self.generate_products(self.products_size)
             time.sleep(2)
-            orders = self.generate_orders()
+            orders = self.generate_orders(self.orders_size)
             self.logger.info("Finished fake dataset generation")
             return customers, products, orders
         except Exception:
             self.logger.exception("Error generating fake dataset")
             raise
 
-    def generate_customers(self) -> List[Dict]:
+    def generate_customers(self, customer_size) -> List[Dict]:
         try:
             self.logger.info("Starting customer generation")
             # Messing Data
@@ -54,9 +57,11 @@ class FakeDataGenerator:
             characters = ["_","-","/"]
             customer_type = ["cst","customer","user"]
             customer_pool = []
-            for _ in range(600):
+            for _ in range(customer_size):
                 # Generating a pool of unique customers to choose from later
                 by_country = random.choice(countries)
+                # Get ads
+                ads_from = random.choice(ads_sources)
                 #Gender to create user 
                 gender = random.choice(["female","male"])
                 first_name = f"{random.choice(spaces)}{random.choice(by_country['people'][gender]['first_name'])}{random.choice(spaces)}"
@@ -71,7 +76,8 @@ class FakeDataGenerator:
                     "birth_date": self._fake_random_dates(1980,2008),
                     "address": self._fake_address(by_country["city"],by_country["state"],by_country["street"]),
                     "country": random.choice(by_country['country']),
-                    "reviews": random.randint(0,5)
+                    "reviews": random.randint(0,5),
+                    "ads_source": random.choice(ads_from['ads'])
                 })
             self.logger.info("Finished customer generation")
             return customer_pool
@@ -79,14 +85,14 @@ class FakeDataGenerator:
             self.logger.exception("Error generating customers")
             raise
 
-    def generate_products(self) -> List[Dict]:
+    def generate_products(self, products_size) -> List[Dict]:
         try:
             self.logger.info("Starting product generation")
             product_pool = []
             characters = ["_","-","/"]
             letters = ["T","A","O","I","R","Z","U"]
     
-            for _ in range(400):
+            for _ in range(products_size):
                 price, quantity, total = self._products_price()
                 letter_code = f"{random.choice(letters)}{random.choice(letters)}"
                 product = random.choice(product_catalog)
@@ -107,13 +113,13 @@ class FakeDataGenerator:
             self.logger.exception("Error generating products")
             raise
 
-    def generate_orders(self) -> List[Dict]:
+    def generate_orders(self, orders_size) -> List[Dict]:
         try:
             self.logger.info("Starting order generation")
             characters = ["_","-","/"]
             letters = ["T","A","O","I","R","Z","U"]
             orders = []
-            for _ in range(600):
+            for _ in range(orders_size):
                 purchase_date, shipping_date, delivery_date = self._generate_orderDates()
                 letter_code = f"{random.choice(letters)}{random.choice(letters)}"
                 orders.append({
@@ -143,7 +149,7 @@ class FakeDataGenerator:
 
     def _fake_address(self,city,state,street) -> str:
         try:
-            character = ["zt","ave","th","AA"]
+            character = ["zt","ave","th","AA","hh"]
             number = random.randint(0,40)
             city = random.choice(city)
             street = random.choice(street)
@@ -173,7 +179,7 @@ class FakeDataGenerator:
             quantity = None
             total = None
 
-            p = round(random.uniform(100.0, 2000.0), 4)
+            p = round(random.uniform(10.0, 3000.0), 4)
             q = random.randint(1, 10)
             t = round(p * q, 4)
 
@@ -234,12 +240,12 @@ class FakeDataGenerator:
             self.logger.exception("Error generating order dates")
             raise
 
-    def generate(self, max_size: int = 100) -> pd.DataFrame:
+    def generate(self) -> pd.DataFrame:
         try:
             self.logger.info("Starting DataFrame generation")
             order_rows = []
             # Loops to build the denormalized dataset rows
-            for i in range(max_size):
+            for i in range(self.max_size):
                 order_rows.append(self._generate_sample_order())
             
             # High-performance alternative to df.append()
@@ -268,13 +274,15 @@ class FakeDataGenerator:
     def _generate_sample_order(self) -> Dict:
         try:
             characters = ["_","-"]
+            abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            word = random.choice(abc) + random.choice(abc) + random.choice(abc)
             customer = random.choice(self.customers)
             product = random.choice(self.products)
             orders = random.choice(self.orders)
             
             # Build denormalized messy layout
             return {
-                "_id": f"ASTT{random.choice(characters)}{random.randint(10000, 99999)}{random.choice(characters)}{random.randint(00,99)}",
+                "_id": f"ASTT{random.choice(characters)}{word}{random.randint(100000, 999999)}{random.choice(characters)}{random.randint(00,99)}",
                 "cst_id": customer['id'],
                 "cst_first_name": customer['first_name'],
                 "cst_last_name": customer['last_name'],
@@ -284,6 +292,7 @@ class FakeDataGenerator:
                 "cst_gender": customer['gender'],
                 "cst_country": customer['country'],
                 "cst_reviews": customer['reviews'],
+                "cst_ads_source": customer['ads_source'],
                 "pro_id": product["id"],
                 "pro_name": product["product_name"],
                 "pro_brand": product["product_brand"],

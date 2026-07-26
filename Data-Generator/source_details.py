@@ -11,7 +11,7 @@ countries = [
                 "gender": ["Male", "m", "M", "mAle", "MALE", "masculino", "Masc"]
             }
         },
-        "last_names": ["Rodrésiguez", "González", "Hernández", "Martínez", "Pérez", "García", "Sánchez", "Díaz", "Ramírez", "Blanco"],
+        "last_names": ["Rodríguez", "González", "Hernández", "Martínez", "Pérez", "García", "Sánchez", "Díaz", "Ramírez", "Blanco"],
         "city": ["Caracas", "Maracaibo", "Valencia", "Barquisimeto", "Maracay", "Barcelona", "San Cristóbal", "Maturín", "Ciudad Guayana", "Puerto La Cruz"],
         "state": ["Distrito Capital", "Zulia", "Carabobo", "Lara", "Aragua", "Anzoátegui", "Táchira", "Monagas", "Bolívar", "Miranda"],
         "street": ["Avenida Bolívar", "Calle Real", "Avenida Francisco de Miranda", "Calle Principal", "Avenida Las Delicias", "Calle Carabobo", "Avenida Intercomunal", "Calle El Colegio", "Avenida Fuerzas Armadas", "Calle Urdaneta"]
@@ -532,4 +532,51 @@ product_catalog = [
 ]
 
 order_status = ["pending", "processing", "shipped", "delivered"]
-payment_methods = ["credit_card", "debit_card", "paypal", "bank_transfer","crypto"]
+payment_methods = ["credit_card", "debit_card", "paypal", "bank_transfer","crypto","wise","stripe","zelle"]
+ads_sources = [
+    {
+        "ads": ["fb", "FB", "fB", "FaceBook", "FACEBOOK", "faceboo", "facebok", "fb_ads"]
+    },
+    {
+        "ads": ["ig", "IG", "insTagram", "INSTAGRAM", "instagr", "insta", "ig_ads", "instgram"]
+    },
+    {
+        "ads": ["tt", "TT", "tik tok", "TikTok", "TIKTOK", "tik_tok", "tiktok_ads", "tiktokk"]
+    },
+    {
+        "ads": ["google", "goog", "GOOG", "GGL", "googleads", "Google_Ads", "googl_ads", "g_ads"]
+    },
+    {
+        "ads": ["yt", "YT", "YouTube", "YOUTUBE", "you_tube", "youtub", "yt_ads"]
+    },
+    {
+        "ads": ["amz", "AMZ", "AmaZon", "AMAZON", "amazn", "amazon_ads", "amzn"]
+    },
+    {
+        "ads": ["meli", "MELI", "mercadolibre", "MercadoLibre", "mercado_libre", "m_libre", "mercadolibr"]
+    },
+    {
+        "ads": ["x", "X", "tw", "TW", "twitter", "Twitter", "TWITTER", "twiter", "x_ads"]
+    },
+    {
+        "ads": ["li", "LI", "linkedIn", "LinkedIn", "LINKEDIN", "linkdin", "linkedin_ads"]
+    },
+    {
+        "ads": ["pin", "PIN", "pinteres", "Pinterest", "PINTEREST", "pintrst", "pin_ads"]
+    },
+    {
+        "ads": ["bing", "BING", "bingads", "Bing_Ads", "msn", "msn_ads", "microsoft_ads"]
+    },
+    {
+        "ads": ["ebay", "EBAY", "e-bay", "Ebay", "eby"]
+    },
+    {
+        "ads": ["walmart", "WALMART", "wm", "WM", "wallmart", "walmart_ads"]
+    },
+    {
+        "ads": ["email", "EMAIL", "newsletter", "mail", "mailchimp", "klaviyo", "e-mail"]
+    },
+    {
+        "ads": ["seo", "SEO", "organic", "ORGANIC", "organico", "search_organic"]
+    }
+]
