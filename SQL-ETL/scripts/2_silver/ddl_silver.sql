@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS silver.crm_customers (
   cst_email       VARCHAR(50),
   cst_birthdate   DATE,
   cst_address     TEXT,
+  cst_ads_source  VARCHAR(50),
   cst_country     VARCHAR(50),
   created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

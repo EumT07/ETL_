@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS bronze.crm_data_info (
     cst_gender        VARCHAR(50),
     cst_country       VARCHAR(50),
     cst_reviews       VARCHAR(50),
+    cst_ads_source    VARCHAR(50),
     pro_id            VARCHAR(50),
     pro_name          VARCHAR(50),
     pro_brand         VARCHAR(50),

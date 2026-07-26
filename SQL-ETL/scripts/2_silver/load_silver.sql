@@ -32,6 +32,7 @@ BEGIN
         cst_email,
         cst_birthdate,
         cst_address,
+        cst_ads_source,
         cst_country
     )
     WITH customers AS (
@@ -61,6 +62,25 @@ BEGIN
             cst_email,
             cst_birthdate:: DATE,
             cst_address,
+            CASE
+                WHEN LOWER(cst_ads_source) IN ('facebook', 'fb','faceboo','facebok', 'fb_ads', 'face') THEN 'facebook'
+                WHEN LOWER(cst_ads_source) IN ('ig', 'instagram', 'instagr', 'insta', 'ig_ads', 'instgram') THEN 'instagram'
+                WHEN LOWER(cst_ads_source) IN ('tt', 'tik tok', 'tiktok', 'tik_tok', 'tiktok_ads','tiktokk', 'tktk') THEN 'tiktok'
+                WHEN LOWER(cst_ads_source) IN ('google', 'goog', 'good', 'ggl', 'googleads','google_ads', 'g_ads', 'googl_ads') THEN 'google'
+                WHEN LOWER(cst_ads_source) IN ('yt', 'youtube', 'you_tube', 'you_tub', 'youtub', 'yt_ads', 'youtube_ads') THEN 'youtube'
+                WHEN LOWER(cst_ads_source) IN ('amz', 'amazon', 'amazn', 'amazon_ads', 'amzn') THEN 'amazon'
+                WHEN LOWER(cst_ads_source) IN ('meli', 'mercadolibre','mercado_libre', 'm_libre', 'mercadolibr') THEN 'mercadolibre'
+                WHEN LOWER(cst_ads_source) IN ('x', 'tw', 'twitter', 'titter_ads', 'x_ads', 'twiter') THEN 'x'
+                WHEN LOWER(cst_ads_source) IN ('li', 'linkedin', 'linkdin', 'linkedin_ads') THEN 'linkedin'
+                WHEN LOWER(cst_ads_source) IN ('pinterest', 'pin', 'pinteres', 'pintrst', 'pin_ads', 'pinterest_ads') THEN 'pinterest'
+                WHEN LOWER(cst_ads_source) IN ('bing', 'bingads', 'bing_ads', 'msn', 'msn_ads', 'microsoft_ads') THEN 'microsoft'
+                WHEN LOWER(cst_ads_source) IN ('ebay', 'e-bay', 'eby') THEN 'ebay'
+                WHEN LOWER(cst_ads_source) IN ('walmart', 'wm', 'wallmart', 'walmart_ads') THEN 'walmart'
+                WHEN LOWER(cst_ads_source) IN ('email', 'mail', 'mailchimp', 'klaviyo', 'e-mail') THEN 'email'
+                WHEN LOWER(cst_ads_source) IN ('newsletter') THEN 'newsletter'
+                WHEN LOWER(cst_ads_source) IN ('seo', 'organic', 'organico', 'search_organic') THEN 'seo'
+                ELSE 'N/A'
+            END AS cst_ads_source,
             CASE 
                 WHEN LOWER(TRIM(cst_country)) IN ('ar', 'arg', 'argentina', 'arjentina', 'argentinna') THEN 'Argentina'
                 WHEN LOWER(TRIM(cst_country)) IN ('br', 'bra', 'brazil', 'brasil') THEN 'Brasil'
@@ -107,6 +127,7 @@ BEGIN
         cst_email,
         cst_birthdate,
         cst_address,
+        cst_ads_source,
         cst_country
     FROM customers
     WHERE row_id = 1;

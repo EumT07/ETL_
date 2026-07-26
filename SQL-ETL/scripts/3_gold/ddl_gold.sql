@@ -46,7 +46,7 @@ GROUP BY
     cst.id,
     cst.cst_first_name,
     cst.cst_last_name,
-    cst.cst_country
+    cst.cst_country;
 
 -- checking view
 SELECT * FROM gold.vw_customers_details;
@@ -104,7 +104,7 @@ GROUP BY
     TO_CHAR(ord.or_purchase_date, 'FMMonth' )
 ORDER BY
     EXTRACT(YEAR FROM ord.or_purchase_date),
-    EXTRACT(MONTH FROM ord.or_purchase_date)
+    EXTRACT(MONTH FROM ord.or_purchase_date);
 
 -- Check View
 SELECT * FROM gold.vw_monthly_sales_trends;
