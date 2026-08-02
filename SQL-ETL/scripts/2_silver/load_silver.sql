@@ -84,7 +84,7 @@ BEGIN
             CASE 
                 WHEN LOWER(TRIM(cst_country)) IN ('ar', 'arg', 'argentina', 'arjentina', 'argentinna') THEN 'Argentina'
                 WHEN LOWER(TRIM(cst_country)) IN ('br', 'bra', 'brazil', 'brasil') THEN 'Brasil'
-                WHEN LOWER(TRIM(cst_country)) IN ('ca', 'can', 'canada', 'cananda', 'cAnada') THEN 'Canadá'
+                WHEN LOWER(TRIM(cst_country)) IN ('ca', 'can', 'canada', 'cananda', 'cAnada', 'canadá') THEN 'Canadá'
                 WHEN LOWER(TRIM(cst_country)) IN ('cl', 'chl', 'chile', 'chil', 'chli', 'chille', 'cL') THEN 'Chile'
                 WHEN LOWER(TRIM(cst_country)) IN ('co', 'col', 'colombia', 'colombia', 'colonbia', 'colom', 'cO', 'cOlombia') THEN 'Colombia'
                 WHEN LOWER(TRIM(cst_country)) IN ('cr', 'cri', 'costa rica', 'costarica', 'costa rica') THEN 'Costa Rica'

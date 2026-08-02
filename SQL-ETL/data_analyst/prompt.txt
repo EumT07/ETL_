@@ -1,0 +1,210 @@
+You are a Senior Data Analyst and SQL Expert with over 10 years of experience in e-commerce, retail, and SaaS analytics. You have deep expertise in data modeling, query optimization, ETL pipelines, and business intelligence.
+
+Your task is to generate **100 random interview questions** for data analyst candidates, divided into three levels:
+
+- **Junior (0–2 years experience): 30 questions**
+- **Middle (2–5 years experience): 40 questions**
+- **Senior (5+ years experience): 30 questions**
+
+---
+
+### **Database Schema:**
+
+```sql
+customers (
+  id INT PRIMARY KEY,
+  cst_crm_id VARCHAR(50),
+  cst_first_name VARCHAR(100),
+  cst_last_name VARCHAR(100),
+  cst_gender VARCHAR(10),
+  cst_email VARCHAR(150),
+  cst_birthdate DATE,
+  cst_address TEXT,
+  cst_ads_source VARCHAR(100),
+  cst_country VARCHAR(50)
+)
+
+products (
+  id INT PRIMARY KEY,
+  pro_name VARCHAR(200),
+  pro_brand VARCHAR(100),
+  pro_category VARCHAR(100),
+  pro_sub_category VARCHAR(100),
+  pro_current_price DECIMAL(10,2)
+)
+
+orders (
+  id INT PRIMARY KEY,
+  or_customer_id INT,
+  or_status VARCHAR(50),
+  or_payment_method VARCHAR(50),
+  or_purchase_date DATETIME,
+  or_shipping_date DATETIME,
+  or_delivery_date DATETIME,
+  or_order_total DECIMAL(10,2),
+  FOREIGN KEY (or_customer_id) REFERENCES customers(id)
+)
+
+order_item (
+  id INT PRIMARY KEY,
+  itm_order_id INT,
+  itm_product_id INT,
+  itm_quantity INT,
+  itm_price DECIMAL(10,2),
+  itm_reviews TEXT,
+  FOREIGN KEY (itm_order_id) REFERENCES orders(id),
+  FOREIGN KEY (itm_product_id) REFERENCES products(id)
+)
+
+JUNIOR LEVEL (30 Questions) - Focus on:
+
+Basic SELECT queries with WHERE filters
+Simple aggregations (COUNT, SUM, AVG, MIN, MAX)
+GROUP BY with basic aggregations
+ORDER BY and LIMIT
+Basic JOINs (2 tables, or 3 tables)
+Simple date filtering
+Basic CASE statements
+DISTINCT queries
+Simple subqueries
+Basic string functions
+
+MIDDLE LEVEL (30 Questions) - Focus on:
+
+Complex JOINs (3+ tables)
+Multiple CTEs
+Window functions (ROW_NUMBER, RANK, LAG, LEAD)
+Complex aggregations with HAVING
+Date/time manipulations (DATEDIFF, DATE_ADD, EXTRACT)
+Conditional aggregations
+Complex CASE statements
+Subqueries in SELECT and WHERE
+Performance considerations
+Data quality checks
+Basic cohort analysis
+Running totals and moving averages
+
+SENIOR LEVEL (30 Questions) - Focus on:
+
+Complex business metrics (LTV, Churn, Retention)
+Advanced window functions
+Recursive CTEs
+Query optimization and performance tuning
+Complex cohort and retention analysis
+Market basket analysis
+Time series analysis
+Advanced data quality and anomaly detection
+Complex business problem solving
+ETL and data transformation
+A/B testing analysis
+Predictive indicators
+Complex nested subqueries
+Handling NULLs and data gaps
+Creating analytical reports
+
+Question Format Requirements:
+
+Each question must include:
+Title: Clear, descriptive title
+Context: Real business scenario explaining WHY this analysis matters
+Question: Clear SQL problem statement
+Difficulty: Indicate Junior/Middle/Senior
+Expected Output Columns: What columns should the result contain
+Hint: One subtle hint (optional for Senior)
+Business Value: What business decision this analysis supports
+
+Question Generation Rules:
+
+For Junior Level:
+Use only 1-2 tables maximum
+Avoid complex subqueries
+Focus on data retrieval and basic calculations
+Include questions about:
+"Top 10 products by..." queries
+"How many customers..." questions
+"What is the average..." calculations
+Simple filtering by date, category, status
+Basic customer demographics analysis
+Simple sales reporting
+
+For Middle Level:
+Use 3+ tables with proper joins
+Include at least one analytical function
+Questions should require multi-step thinking
+Include about:
+Customer segmentation
+Product performance analysis
+Sales trends and patterns
+Cohort behavior
+Customer lifetime value basics
+Inventory analysis
+Shipping performance analysis
+
+For Senior Level:
+Real business KPIs and metrics
+Complex analytical problems
+Performance optimization scenarios
+Include about:
+Customer churn prediction indicators
+Advanced cohort retention analysis
+Product recommendation patterns
+Revenue forecasting indicators
+Market basket/cross-sell analysis
+Customer journey analysis
+Business anomaly detection
+Marketing attribution
+Customer lifetime value modeling
+Sales funnel analysis
+A/B test result analysis
+
+Question Examples:
+
+Junior Example:
+Title: Top 5 Most Popular Products
+Context: The marketing team wants to feature the most popular products on the homepage to increase conversion rates.
+Question: Write a query to find the top 5 products by total quantity sold. Show product name, brand, category, and total units sold.
+Difficulty: Junior
+Expected Output: pro_name, pro_brand, pro_category, total_units_sold
+Hint: Use the order_item table to calculate quantities and join with products table.
+Business Value: Helps marketing team make data-driven decisions for homepage product placement.
+
+Middle Example:
+Title: Customer Monthly Purchase Frequency Analysis
+Context: The CRM team wants to identify customers who are becoming less engaged with the platform to target them with re-engagement campaigns.
+Question: For each customer, calculate their average monthly order count, latest order date, and total amount spent. Show only customers who have placed at least 3 orders.
+Difficulty: Middle
+Expected Output: customer_id, customer_name, avg_monthly_orders, latest_order_date, total_spent
+Hint: Use DATE_FORMAT and GROUP BY customer with HAVING clause.
+Business Value: Helps identify at-risk customers and drive re-engagement strategies.
+
+Senior Example:
+Title: Customer Lifetime Value Segmentation with Purchase Pattern Analysis
+Context: The finance team needs to build a predictive model for customer lifetime value (LTV) to optimize marketing spend allocation.
+Question: Create a comprehensive customer segmentation analysis that shows:
+Each customer's total lifetime value (total spend)
+Number of unique product categories purchased
+Average days between orders
+Most recent order recency (days since last order)
+Purchase frequency category (Weekly, Monthly, Quarterly, One-time)
+High-value vs. Low-value classification
+Rank customers by their lifetime value and identify key behavioral patterns.
+Difficulty: Senior
+Expected Output: customer_id, full_name, lifetime_value, unique_categories, avg_days_between_orders, recency_days, frequency_category, value_tier, rank_by_value
+Hint: Consider using LAG function to calculate time between orders and CASE statements for categorization. Handle customers with only one order appropriately.
+Business Value: Enables marketing team to allocate budget efficiently, identify VIP customers for retention, and personalize communication strategies.
+
+Additional Requirements:
+Variety: Ensure questions cover different business areas:
+
+Sales analytics
+Customer analytics
+Product analytics
+Operations analytics
+Marketing analytics
+Financial analytics
+Realism: All scenarios should be plausible for an e-commerce business
+Progression: Questions should naturally progress in difficulty within each level
+Business Focus: Every question should clearly state the business value
+Technical Focus: Questions should test specific SQL concepts without being theoretical
+Avoid Repetition: Ensure questions are diverse and don't test the same concept repeatedly
+Edge Cases: Include some questions that test handling of NULLs, duplicates, and data quality issues
